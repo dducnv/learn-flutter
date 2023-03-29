@@ -43,6 +43,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<void> _deleteData(int id) async {
     await DBHelper.deleteDatabase(id);
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("Data Deleted"),
+      ),
+    );
     _refreshData();
   }
 
@@ -54,7 +59,35 @@ class _HomeScreenState extends State<HomeScreen> {
       _descController.text = existingData['desc'];
     }
 
-    showModalBottomSheet(
+    modalBottom(id);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.grey[50],
+      appBar: AppBar(
+        title: const Text("CRUD with SQLite"),
+      ),
+      body: _isLoading
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
+          : ListView.builder(
+              itemCount: _allData.length,
+              itemBuilder: (context, index) => cardTodo(index)),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => {
+          _titleController.clear(),
+          _descController.clear(),
+          showBottomSheet(null)},
+        child: const Icon(Icons.add),
+      ),
+    );
+  }
+
+  Future<dynamic> modalBottom(int? id) {
+    return showModalBottomSheet(
         elevation: 5,
         isDismissible: true,
         context: context,
@@ -70,20 +103,20 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     TextField(
                       controller: _titleController,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                           border: OutlineInputBorder(), hintText: "Title"),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     TextField(
                       controller: _descController,
                       maxLines: 4,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           hintText: "Description"),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Center(
@@ -98,11 +131,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           _titleController.text = "";
                           _descController.text = "";
 
-                          Navigator.of(context).pop();
+                          Navigator.pop(context);
                         },
                         child: Text(
                           id == null ? "Add Data" : "Eddit Data",
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 18, fontWeight: FontWeight.bold),
                         ),
                       ),
@@ -111,35 +144,51 @@ class _HomeScreenState extends State<HomeScreen> {
             ));
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.grey[50],
-      appBar: AppBar(
-        title: Text("CRUD with SQLite"),
+  Dismissible cardTodo(int index) {
+    return Dismissible(
+      key: UniqueKey(),
+      background: Container(
+        color: Colors.red,
+        margin: const EdgeInsets.symmetric(horizontal: 15),
+        alignment: Alignment.centerRight,
+        child: const Icon(
+          Icons.delete,
+          color: Colors.white,
+        ),
       ),
-      body: _isLoading
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
-          : ListView.builder(
-              itemCount: _allData.length,
-              itemBuilder: (context, index) => Card(
-                    margin: EdgeInsets.only(bottom: 5),
-                    child: ListTile(
-                      title: Padding(
-                        padding: EdgeInsets.symmetric(vertical: 3),
-                        child: Text(
-                          _allData[index]['title'],
-                          style: TextStyle(fontSize: 20),
-                        ),
-                      ),
-                      subtitle: Text(_allData[index]['desc']),
-                    ),
-                  )),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => showBottomSheet(null),
-        child: Icon(Icons.add),
+      onDismissed: (_) => {_deleteData(_allData[index]['id'] as int)},
+      child: Card(
+        child: ListTile(
+          onTap: () => showBottomSheet(_allData[index]['id'] as int),
+          onLongPress: () => showBottomSheet(_allData[index]['id'] as int),
+          title: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 3),
+            child: Text(
+              _allData[index]['title'],
+              style: const TextStyle(fontSize: 20),
+            ),
+          ),
+          subtitle: Text(_allData[index]['desc']),
+          trailing: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              IconButton(
+                onPressed: () => showBottomSheet(_allData[index]['id'] as int),
+                icon: const Icon(
+                  Icons.edit,
+                  color: Colors.yellow,
+                ),
+              ),
+              IconButton(
+                onPressed: () => _deleteData(_allData[index]['id'] as int),
+                icon: const Icon(
+                  Icons.delete,
+                  color: Colors.red,
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
