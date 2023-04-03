@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:learn_bloc_flutter/ui/components/direct_navigation.dart';
-import 'package:learn_bloc_flutter/ui/components/dynamic_navigation.dart';
+import 'package:learn_bloc_flutter/src/ui/components/direct_navigation.dart';
+import 'package:learn_bloc_flutter/src/ui/components/dynamic_navigation.dart';
 
 import '../components/static_navigate.dart';
 

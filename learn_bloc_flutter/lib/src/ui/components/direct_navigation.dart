@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:learn_bloc_flutter/ui/screens/about_page.dart';
-import 'package:learn_bloc_flutter/ui/screens/gallery_page.dart';
-import 'package:learn_bloc_flutter/ui/screens/home_page.dart';
+import 'package:learn_bloc_flutter/src/ui/screens/about_page.dart';
+import 'package:learn_bloc_flutter/src/ui/screens/gallery_page.dart';
+import 'package:learn_bloc_flutter/src/ui/screens/home_page.dart';
 
 class DirectNavigation  extends StatelessWidget {
   const DirectNavigation({Key? key}) : super(key: key);

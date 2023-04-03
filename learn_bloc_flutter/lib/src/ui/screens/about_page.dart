@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:learn_bloc_flutter/ui/components/static_navigate.dart';
+import 'package:learn_bloc_flutter/src/ui/components/static_navigate.dart';
 
 import '../components/direct_navigation.dart';
 import '../components/dynamic_navigation.dart';
