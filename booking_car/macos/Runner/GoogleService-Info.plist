@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>455312819059-q0aiodmjb88h45pad9sgrce7h6nnqkcn.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.455312819059-q0aiodmjb88h45pad9sgrce7h6nnqkcn</string>
+	<key>API_KEY</key>
+	<string>AIzaSyC7ljCafYNDE07CqBtK46zz-hwYgPigCFw</string>
+	<key>GCM_SENDER_ID</key>
+	<string>455312819059</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.bookingCar</string>
+	<key>PROJECT_ID</key>
+	<string>booking-car-2023</string>
+	<key>STORAGE_BUCKET</key>
+	<string>booking-car-2023.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:455312819059:ios:985b53a9d625d483f47b06</string>
+</dict>
+</plist>
