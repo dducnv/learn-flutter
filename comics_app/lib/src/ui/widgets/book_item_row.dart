@@ -1,8 +1,11 @@
 import 'package:comics_app/src/constants/color.global.dart';
+import 'package:comics_app/src/models/book.dart';
 import 'package:flutter/material.dart';
 
 class BookItemRow extends StatelessWidget {
-  const BookItemRow({Key? key}) : super(key: key);
+  BookModel? bookModel;
+  int? index;
+  BookItemRow({Key? key,this.bookModel,this.index}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,9 +18,9 @@ class BookItemRow extends StatelessWidget {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(10),
             child: Image.network(
-              'https://media.toonder.vn/cover/covongocnghechcuatoi/400x533%20thumb.jpg',
-              width: 70,
-              height: 70,
+             '${bookModel!.imgUrl}',
+              width: MediaQuery.of(context).size.height * 0.1,
+              height: MediaQuery.of(context).size.height * 0.1,
               fit: BoxFit.cover,
             ),
           )),
@@ -26,7 +29,7 @@ class BookItemRow extends StatelessWidget {
           child: Container(
               alignment: Alignment.topCenter,
               padding: EdgeInsets.only(top: 5, left: 10, right: 10),
-              child: Text('1',
+              child: Text('${index}',
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 14,
@@ -38,7 +41,7 @@ class BookItemRow extends StatelessWidget {
           padding: EdgeInsets.only(top: 5),
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text('Cổ Vũ Nghe Chừng Của Tôi',
+            Text('${bookModel!.bookName}',
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
                 style: TextStyle(
@@ -57,7 +60,7 @@ class BookItemRow extends StatelessWidget {
                     decoration: BoxDecoration(
                         gradient: GlobalColors.categoryBgGradient,
                         borderRadius: BorderRadius.all(Radius.circular(100))),
-                    child: Text("Truyện tranh",
+                    child: Text('${bookModel?.categoryList}',
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 10,

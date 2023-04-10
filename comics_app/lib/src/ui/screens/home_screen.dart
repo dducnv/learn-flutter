@@ -2,10 +2,11 @@ import 'package:comics_app/src/constants/color.global.dart';
 import 'package:comics_app/src/constants/media.global.dart';
 import 'package:comics_app/src/ui/widgets/book_item.dart';
 import 'package:comics_app/src/ui/widgets/home_carousel.dart';
+import 'package:comics_app/src/ui/widgets/list_category_book.dart';
 import 'package:comics_app/src/ui/widgets/rank_item.dart';
 import 'package:flutter/material.dart';
 import '../../constants/variable.global.dart';
-import '../widgets/book_list_view.dart';
+import '../widgets/cetegory_item_list_view.dart';
 import '../widgets/button_navbar.dart';
 import '../widgets/home_appbar.dart';
 import '../widgets/rank_list_view.dart';
@@ -61,11 +62,7 @@ class HomeScreenState extends State<HomeScreen> {
             children: [
               HomeCarousel(),
               SizedBox(height: 20),
-              BookListView(),
-              RankListView(),
-              BookListView(),
-              BookListView(),
-              BookListView(),
+              ListCategoryBook()
             ],
           ),
         ));

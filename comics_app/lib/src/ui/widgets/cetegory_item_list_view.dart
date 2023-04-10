@@ -1,13 +1,21 @@
+import 'dart:convert';
+
 import 'package:comics_app/src/constants/color.global.dart';
+import 'package:comics_app/src/models/book.dart';
+import 'package:comics_app/src/models/category.dart';
 import 'package:flutter/material.dart';
 
 import 'package:comics_app/src/ui/widgets/book_item.dart';
 
-class BookListView extends StatelessWidget {
-  const BookListView({Key? key}) : super(key: key);
-
+class CategoryItemListView extends StatelessWidget {
+  CategoryModel? categoryModel;
+  CategoryItemListView({Key? key, this.categoryModel}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    List<BookModel> books = categoryModel!.data!.map((e) {
+      return BookModel.fromJson(e);
+    }).toList();
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
@@ -15,7 +23,7 @@ class BookListView extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Truyện tranh',
+              Text('${categoryModel!.title}',
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 18,
@@ -29,15 +37,22 @@ class BookListView extends StatelessWidget {
                           fontWeight: FontWeight.w400)))
             ],
           ),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                for (int i = 0; i < 10; i++)
-                  Row(
-                    children: [BookItem(), SizedBox(width: 10)],
-                  ),
-              ],
+          SizedBox(
+            height: 220,
+            child: ListView.builder(
+              physics: BouncingScrollPhysics(),
+              scrollDirection: Axis.horizontal,
+              itemCount: books.length,
+              itemBuilder: (context, index) {
+                return Row(
+                  children: [
+                    BookItem(bookModel: books[index]),
+                    SizedBox(
+                      width: 10,
+                    )
+                  ],
+                );
+              },
             ),
           ),
         ],

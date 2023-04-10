@@ -1,4 +1,6 @@
-class BookModal {
+import 'dart:convert';
+
+class BookModel {
   int? numberOfChapter;
   String? authorName;
   String? bookName;
@@ -15,7 +17,7 @@ class BookModal {
   int? viewNo;
   String? lastUpdateTime;
 
-  BookModal(
+  BookModel(
       {this.numberOfChapter,
       this.authorName,
       this.bookName,
@@ -32,7 +34,11 @@ class BookModal {
       this.viewNo,
       this.lastUpdateTime});
 
-  BookModal.fromJson(Map<String, dynamic> json) {
+  BookModel.stringToModel(String book){
+     var bookJson = jsonDecode(book);
+     BookModel bookModel = BookModel.fromJson(bookJson);
+  }    
+  BookModel.fromJson(Map<String, dynamic> json) {
     numberOfChapter = json['NumberOfChapter'];
     authorName = json['AuthorName'];
     bookName = json['BookName'];
@@ -42,11 +48,26 @@ class BookModal {
     bookThumb = json['BookThumb'];
     imgUrl = json['imgUrl'];
     bookUUID = json['BookUUID'];
-    likeNo = json['LikeNo'];
-    categoryList = json['CategoryList'];
+    if (json['LikeNo'] != null) {
+      likeNo = json['LikeNo'];
+    }
+    if (json['TotalLikeNo'] != null) {
+      likeNo = json['TotalLikeNo'];
+    }
+    if(json['CategoryList'] != null){
+      categoryList = json['CategoryList'] ;
+    }else{
+       categoryList = json['CategoryName'] ;
+    }
+    
     bookId = json['BookId'];
     updateStatus = json['updateStatus'];
-    viewNo = json['ViewNo'];
+    if (json['ViewNo']  != null) {
+      viewNo = json['ViewNo'];
+    }
+    if (json['TotalLikeNo']  != null) {
+      viewNo = json['TotalViewNo'];
+    }
     lastUpdateTime = json['lastUpdateTime'];
   }
 
@@ -61,11 +82,22 @@ class BookModal {
     data['BookThumb'] = this.bookThumb;
     data['imgUrl'] = this.imgUrl;
     data['BookUUID'] = this.bookUUID;
-    data['LikeNo'] = this.likeNo;
+    if(data['LikeNo']) {
+      data['LikeNo'] = this.likeNo;
+    }
+    if(data['TotalLikeNo']) {
+      data['TotalLikeNo'] = this.likeNo;
+    }
     data['CategoryList'] = this.categoryList;
     data['BookId'] = this.bookId;
     data['updateStatus'] = this.updateStatus;
     data['ViewNo'] = this.viewNo;
+    if (data['ViewNo']) {
+      data['ViewNo'] = this.viewNo;
+    }
+    if (data['TotalLikeNo']) {
+      data['TotalLikeNo'] = this.viewNo;
+    }
     data['lastUpdateTime'] = this.lastUpdateTime;
     return data;
   }

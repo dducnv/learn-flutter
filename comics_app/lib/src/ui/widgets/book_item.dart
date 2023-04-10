@@ -1,8 +1,11 @@
 import 'package:comics_app/src/constants/color.global.dart';
+import 'package:comics_app/src/models/book.dart';
 import 'package:flutter/material.dart';
 
 class BookItem extends StatelessWidget {
-  const BookItem({Key? key}) : super(key: key);
+  BookModel? bookModel;
+
+  BookItem({required this.bookModel});
 
   @override
   Widget build(BuildContext context) {
@@ -15,13 +18,13 @@ class BookItem extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(10),
             child: Image.network(
-              "https://media.toonder.vn/cover/covongocnghechcuatoi/400x533%20thumb.jpg",
+              '${bookModel!.imgUrl}',
               height: 150,
               fit: BoxFit.cover,
             ),
           ),
           SizedBox(height: 5),
-          Text("Cổ Vũ Nghe Chừng Của Tôi",
+          Text( '${bookModel!.bookName}',
            overflow: TextOverflow.ellipsis,
                maxLines: 2,
               style: TextStyle(
@@ -36,7 +39,7 @@ class BookItem extends StatelessWidget {
               decoration: BoxDecoration(
               gradient:  GlobalColors.categoryBgGradient ,
               borderRadius: BorderRadius.all(Radius.circular(100))),
-              child: Text("Truyện tranh",
+              child: Text('${bookModel!.categoryList}',
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 10,
