@@ -16,4 +16,11 @@ class GlobalColors {
       purpleColor,
     ],
   );
+  static LinearGradient categoryBgGradient = LinearGradient(
+    begin: Alignment.centerLeft,
+    end: Alignment.centerRight,
+    colors: [
+      bgColor.withOpacity(0.5),
+      nonActiveColor.withOpacity(0.6)
+    ]);
 }

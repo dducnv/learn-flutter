@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../constants/color.global.dart';
+import 'package:comics_app/src/constants/color.global.dart';
 
 class IconButtonNavBar extends StatelessWidget {
   final bool active;

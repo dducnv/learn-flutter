@@ -2,8 +2,8 @@ import 'package:comics_app/src/ui/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../constants/color.global.dart';
-import '../../constants/media.global.dart';
+import 'package:comics_app/src/constants/color.global.dart';
+import 'package:comics_app/src/constants/media.global.dart';
 
 extension HomeExtension on HomeScreenState {
 BottomNavigationBarItem buttonNavBar(String icon, String label, bool active) {

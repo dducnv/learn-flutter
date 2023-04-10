@@ -1,5 +1,5 @@
-import 'package:comics_app/src/ui/screens/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:comics_app/src/ui/screens/home_screen.dart';
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});

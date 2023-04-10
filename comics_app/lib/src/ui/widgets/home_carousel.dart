@@ -1,5 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:comics_app/src/constants/color.global.dart';
+import 'package:comics_app/src/models/banner.dart';
+import 'package:comics_app/src/networks/network_request.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -22,6 +24,19 @@ class HomeCarousel extends StatefulWidget {
 class _HomeCarouselState extends State<HomeCarousel> {
   int _activeIndex = 0;
   final carouselController = CarouselController();
+
+  List<BannerModal> bannerData = [];
+
+  @override
+  void initState() {
+    super.initState();
+    NetworkRequest.fetchBanners().then((res) {
+      setState(() {
+        bannerData = res;
+      });
+    }).catchError((onError) => {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -33,12 +48,14 @@ class _HomeCarouselState extends State<HomeCarousel> {
             children: [
               CarouselSlider.builder(
                   carouselController: carouselController,
-                  itemCount: imgList.length,
+                  itemCount: bannerData.length,
                   itemBuilder: (context, index, realIndex) {
-                    final urlImage = imgList[index];
-                    return buildImage(urlImage, index);
+                    final urlImage = bannerData[index];
+                    return buildImage(urlImage.imgUrl as String, index);
                   },
                   options: CarouselOptions(
+                      enableInfiniteScroll: false,
+                      autoPlay: true,
                       initialPage: 0,
                       height: MediaQuery.of(context).size.height * 0.7,
                       viewportFraction: 1.0,
@@ -46,9 +63,9 @@ class _HomeCarouselState extends State<HomeCarousel> {
                       onPageChanged: (index, reson) =>
                           setState(() => _activeIndex = index))),
               Container(
-                margin: EdgeInsets.only(bottom: 40),
-                alignment: Alignment.bottomCenter,
-                child: buildIndicator()),
+                  margin: EdgeInsets.only(bottom: 20),
+                  alignment: Alignment.bottomCenter,
+                  child: buildIndicator()),
             ],
           ),
         ),
@@ -67,12 +84,13 @@ class _HomeCarouselState extends State<HomeCarousel> {
             fit: BoxFit.cover),
       ),
       child: Container(
+        height: 100,
         decoration: BoxDecoration(
             gradient: LinearGradient(
                 begin: Alignment.center,
                 end: Alignment.bottomCenter,
                 colors: [
-              GlobalColors.bgColor.withOpacity(0.4),
+              GlobalColors.bgColor.withOpacity(0.2),
               GlobalColors.bgColor.withOpacity(1)
             ])),
       ));
@@ -81,10 +99,10 @@ class _HomeCarouselState extends State<HomeCarousel> {
         activeIndex: _activeIndex,
         onDotClicked: (index) => carouselController.animateToPage(index),
         count: imgList.length,
-        effect: ScrollingDotsEffect (
-          dotColor: GlobalColors.nonActiveColor.withOpacity(0.4),
-         activeDotColor: GlobalColors.orangeColor,
-          dotWidth: 13,
-           dotHeight: 13),
+        effect: ScrollingDotsEffect(
+            dotColor: GlobalColors.nonActiveColor.withOpacity(0.4),
+            activeDotColor: GlobalColors.orangeColor,
+            dotWidth: 13,
+            dotHeight: 13),
       );
 }

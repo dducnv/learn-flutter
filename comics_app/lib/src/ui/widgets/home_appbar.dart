@@ -18,7 +18,7 @@ class HomeAppBar extends StatelessWidget with PreferredSizeWidget {
         alignment: Alignment.center,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: GlobalColors.grayColor.withOpacity(0.5),
+          color: GlobalColors.bgColor.withOpacity(0.5),
         ),
         child: IconButton(
             splashColor: Colors.transparent,
@@ -34,7 +34,7 @@ class HomeAppBar extends StatelessWidget with PreferredSizeWidget {
           width: 32,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: GlobalColors.grayColor.withOpacity(0.5),
+            color: GlobalColors.bgColor.withOpacity(0.5),
           ),
           child: IconButton(
               splashColor: Colors.transparent,
@@ -49,7 +49,7 @@ class HomeAppBar extends StatelessWidget with PreferredSizeWidget {
           width: 32,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: GlobalColors.grayColor.withOpacity(0.5),
+            color: GlobalColors.bgColor.withOpacity(0.5),
           ),
           child: IconButton(
               splashColor: Colors.transparent,
